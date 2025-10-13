@@ -1,84 +1,104 @@
-﻿# Proyek: Klasifikasi Pesan Masuk Bisnis Makanan Lokal
+Proyek: Klasifikasi Ulasan Produk E-Commerce Indonesia
+1. Elevator Pitch
 
+Sebuah sistem klasifikasi teks otomatis yang mengelompokkan ulasan pelanggan e-commerce berbahasa Indonesia ke dalam tiga kategori utama berdasarkan isi pesannya:
+(1) PUJIAN / ORDER, (2) KELUHAN / TANYA MASALAH PRODUK, dan (3) KOMENTAR UMUM.
 
+Sistem ini dikembangkan menggunakan dataset PRDECT-ID, kumpulan ribuan review produk Indonesia dari berbagai kategori (elektronik, fashion, alat rumah tangga, dll).
+Dengan memanfaatkan model machine learning ringan seperti Logistic Regression dan Naive Bayes, sistem ini membantu penjual online untuk memahami pola komunikasi pelanggan, memprioritaskan tanggapan yang penting, dan meningkatkan kepuasan pelanggan secara efisien.
 
-### **1. Elevator Pitch**
+Targetnya: akurasi ≥85% dan waktu klasifikasi <2 detik per ulasan, jauh lebih cepat dibanding memilah ulasan manual satu per satu.
 
-Sebuah sistem klasifikasi teks sederhana yang otomatis mengelompokkan pesan masuk (WA/DM/Email) sebuah bisnis makanan/kue rumahan lokal ke dalam kategori penting (misalnya, ORDER, TANYA HARGA/STOK, LAIN-LAIN). Sistem ini membantu pemilik bisnis memprioritaskan respons dalam <2 detik dengan akurasi ≥85%, jauh lebih efisien dibandingkan membaca manual yang memakan waktu (Baseline: ±10 menit per pesan).
+2. Problem Statement
 
+Marketplace seperti Tokopedia dan Shopee menampung ribuan ulasan pelanggan setiap hari.
+Penjual sering kewalahan membedakan mana ulasan yang berisi pujian (positif), keluhan atau pertanyaan produk, dan komentar umum.
 
+Tanpa sistem otomatis, proses ini memakan waktu lama dan sering membuat keluhan pelanggan terabaikan.
 
-### 2\. Problem Statement
+Dengan sistem klasifikasi otomatis berbasis teks, penjual dapat:
 
-Pemilik UMKM makanan dan freelancer lokal kesulitan mengelola lonjakan pesan masuk (WA/DM) yang bervariasi. Mereka harus membaca dan mengelompokkan pesan secara manual (misalnya, mencari pesan yang berisi "pesan" atau "order") untuk memprioritaskan transaksi, yang menyebabkan slow response dan potensi kehilangan pelanggan. Nilai bagi pengguna (pemilik bisnis) adalah peningkatan efisiensi operasional dan pengurangan risiko kehilangan order. Nilai bisnis adalah peningkatan response time pelanggan dan kepuasan pelanggan secara keseluruhan.
+Mengenali ulasan yang mengandung masalah atau pertanyaan produk,
 
+Memprioritaskan respons terhadap keluhan penting,
 
+Menganalisis persepsi pelanggan terhadap produk secara cepat.
 
-### 3\. Scope Awal
+3. Scope Awal
 
-**In-Scope : Klasifikasi Teks ke 3 Kategori Utama: 
-1) ORDER,
-2)  TANYA HARGA/STOK
-3)   LAIN-LAIN.
-   Implementasi model Machine Learning Klasifikasi Teks ringan (misalnya, Naive Bayes atau Logistic Regression) menggunakan dataset statis simulasi berbahasa Indonesia sehari-hari.
+In-Scope:
 
-Out-of-Scope: Sentiment Analysis yang mendalam (hanya fokus pada tujuan pesan). Integrasi real-time ke platform perpesanan (WA/DM). Generasi jawaban otomatis (chatbot). Analisis data yang sangat kompleks seperti tata bahasa yang sempurna.**
+Klasifikasi teks Bahasa Indonesia menjadi tiga kategori utama:
 
+PUJIAN / ORDER
 
+KELUHAN / TANYA PRODUK
 
-### **4.Metrik**
+KOMENTAR UMUM
 
-* **Baseline: Waktu yang dibutuhkan pemilik bisnis untuk membaca dan mengelompokkan pesan secara manual: ±10 menit per 5 pesan. Akurasi pengelompokan manual: ≈95%.**
-* **Target: Klasifikasi otomatis <2 detik per pesan dengan akurasi Macro F1-Score ≥85%.**
-* **Evaluasi: Macro F1-Score (untuk memastikan kinerja baik di semua kategori, bukan hanya kelas dominan) dan Inference Time (detik).**
+Implementasi model machine learning ringan (Logistic Regression, Naive Bayes).
 
+Pemanfaatan dataset PRDECT-ID (review produk Indonesia) untuk pelatihan model.
 
+Out-of-Scope:
 
-### **5. Struktur Repository**
+Analisis sentimen mendalam (positif/negatif).
 
-**README.md → Dokumentasi utama proyek (Problem Statement, Metrik, dll.).**
+Integrasi real-time ke sistem marketplace.
 
+Penggunaan model bahasa besar (BERT, GPT).
 
+4. Metrik
 
-* **data/ → Dataset simulasi pesan dalam format CSV (dummy\_pesan.csv).**
-* **notebooks/ → Berisi notebook eksplorasi dummy (01\_EDA\_Text\_Simulasi.ipynb).**
-* **src/ → Modul kode Python untuk preprocessing dan model klasifikasi.**
-* **docs/ → Dokumentasi Etika \& Privasi, Design Notes.**
-* **issues board → Manajemen To Do / In Progress / Done (minimal 5 issue).**
+Baseline (manual):
 
+10 menit untuk memilah 20 ulasan pelanggan.
 
+Akurasi manusia ±95%.
 
-### **6. Roadmap**
+Target sistem:
 
-* **M1: Definisi masalah, setup repo (sudah selesai), notebook eksplorasi data dummy simulasi.**
-* **M2: Finalisasi dataset pesan simulasi dan preprocessing teks.**
-* **M3: Implementasi dan training Model Baseline (mis. Naive Bayes) dan evaluasi awal.**
-* **M4: Fine-tuning model atau eksplorasi model yang lebih canggih (mis. SVM).**
-* **M5: Evaluasi akhir Metrik (F1-Score \& Response Time).**
-* **M6: Dokumentasi, laporan akhir, dan demo Command Line Interface (CLI).**
+Waktu klasifikasi otomatis <2 detik per ulasan.
 
+Macro F1-Score ≥85%.
 
+Evaluasi:
 
-### **7. Etika \& Privasi**
+Macro F1-Score → untuk keseimbangan antar kelas.
 
-1. **Risiko:**
-1. 
-**Risiko utama adalah Misklasifikasi Kritis, di mana model salah mengelompokkan pesan ORDER sebagai LAIN-LAIN, yang dapat menyebabkan order terlewat dan kerugian finansial/reputasi bagi bisnis.**
+Confusion Matrix → untuk analisis kesalahan antar kategori.
 
+5. Struktur Repository
+README.md         → Dokumentasi utama proyek  
+data/             → Dataset PRDECT-ID (PRDECT-ID Dataset.csv)  
+notebooks/        → Notebook EDA & Preprocessing  
+src/              → Script preprocessing & model baseline  
+docs/             → Dokumentasi Etika, Privasi, dan Design Notes  
+issues board      → To Do / In Progress / Done (≥5 issue)
 
+6. Roadmap
 
-**2. Mitigasi:**
+M1: Definisi masalah & setup repo (selesai).
 
-**Kami akan menggunakan dataset yang sepenuhnya disimulasikan (dibuat sendiri), sehingga risiko privasi (kebocoran PII) dihilangkan. Untuk mengatasi Misklasifikasi Kritis, kami akan memprioritaskan metrik Recall pada kelas ORDER dan menetapkan threshold klasifikasi yang lebih ketat untuk kelas tersebut.**
+M2: EDA + preprocessing dataset PRDECT-ID (hapus noise, tokenisasi, dll).
 
+M3: Implementasi model baseline (Logistic Regression / Naive Bayes).
 
+M4: Fine-tuning model (mis. SVM / TF-IDF tuning).
 
-### **8. Link Github**
+M5: Evaluasi performa (F1-Score, confusion matrix).
 
-**https://github.com/shopia-sal/trpl-ai-capstone.git**
+M6: Dokumentasi akhir & demo CLI sederhana.
 
+7. Etika & Privasi
 
+Risiko:
+Model bisa salah mengklasifikasikan ulasan negatif sebagai positif, yang dapat menyebabkan miss-feedback dalam analisis pelanggan.
 
+Mitigasi:
+Dataset PRDECT-ID bersifat publik dan tidak memuat data pribadi (PII), sehingga aman untuk digunakan.
+Untuk mengurangi kesalahan interpretasi, sistem akan menitikberatkan pada akurasi kelas keluhan, agar respons penjual terhadap masalah pelanggan tetap cepat dan tepat.
 
+8. Link GitHub
 
-
+🔗 https://github.com/shopia-sal/trpl-ai-capstone.git
